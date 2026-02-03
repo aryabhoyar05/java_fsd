@@ -1,0 +1,62 @@
+abstract class Vehicle {
+    private String brand;
+    private int speed;
+
+    public Vehicle(String brand, int speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    // Abstraction
+    public abstract void startEngine();
+
+    // Method Overloading
+    public void accelerate() {
+        speed += 10;
+        System.out.println("Vehicle accelerated. Speed: " + speed + " km/h");
+    }
+
+    public void accelerate(int increment) {
+        speed += increment;
+        System.out.println("Vehicle accelerated by " + increment +
+                ". Speed: " + speed + " km/h");
+}
+}
+
+// Inheritance + Runtime Polymorphism
+class Car extends Vehicle {
+
+    public Car(String brand, int speed) {
+        super(brand, speed);
+    }
+
+    // Runtime Polymorphism
+    @Override
+    public void startEngine() {
+        System.out.println("Car engine started using key ignition.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        // Polymorphism: Parent reference, child object
+        Vehicle vehicle = new Car("Toyota", 60);
+
+        vehicle.startEngine();   // Runtime Polymorphism
+        vehicle.accelerate();    // Compile-time Polymorphism
+        vehicle.accelerate(20);  // Compile-time Polymorphism
+    }
+}
